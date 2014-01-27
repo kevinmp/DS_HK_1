@@ -1,0 +1,4 @@
+Lesson 01
+---------
+Learning how to set up Github.
+Note to self: must learn how to use Git.
