@@ -2,3 +2,6 @@ Lesson 01
 ---------
 Learning how to set up Github.
 Note to self: must learn how to use Git.
+Also learn how to use Sublime Text. Seems pretty good.
+
+Note to self again: set up code completion on Sublime Text also Python tools.
