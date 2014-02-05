@@ -1,6 +1,0 @@
-Impressions Sum: 2295559
-Clicks Sum: 42449.0
-CTR: 1.85%
-Average Age: 29
-Max Age: 108
-Oldest Person: ['108', '0', '3', '0', '1']
