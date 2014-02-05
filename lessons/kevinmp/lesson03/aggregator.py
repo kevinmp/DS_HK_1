@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from __future__ import division
 import pandas as pd
+import numpy
 
 def get_nytimes_datasets(n):
     """
@@ -24,12 +25,12 @@ def ratio(x,y):
         return x/y
     else:
         return 0
+def CTR(df):
+    return  (sum(df["Clicks"])/sum(df["Impressions"]))
 
 df = get_nytimes_datasets(1)
-
-df["CTR"] = map(ratio, df["Clicks"], df["Impressions"])
-df2 = df["Age"] > 100
-
+#df['CTR'] = df[['Clicks','Impressions']].apply(CTR)
+df2= df[["Age","Gender","Signed_In","Clicks","Impressions"]].groupby(["Age","Gender","Signed_In"]).apply(CTR)
 print df2
 
-df2.to_csv('nytimes_aggregation.csv')
+df2.to_csv('nytimes_aggregation.csv', header=True)
