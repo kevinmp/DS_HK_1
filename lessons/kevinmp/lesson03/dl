@@ -1,0 +1,5 @@
+#!/bin/sh
+for ((i=1; i<31; i++))
+	do
+		curl http://stat.columbia.edu/~rachel/datasets/nyt$i.csv > nyt$i.csv
+	done
