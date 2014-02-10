@@ -1,9 +1,16 @@
 
 # matrices copied from instructors notes with one additional for error checking
+import timeit as t
+from numpy import * 
 v = [5, 6, 7, 8]
 m1 = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
 m2 = [[1, 2], [3, 4], [5, 6], [7, 8]]
 m3 = [[1, 2], [3, 4], [5, 6]]
+
+mtest1 = matrix('1 2; 3 4')
+mtest2 = matrix('1 3; 2 4')
+mtest3 = [[1, 2], [3, 4]]
+mtest4 = [[1, 3], [2, 4]]
 
 def matrixbycolumnvector(m, cv):
     """ 
@@ -100,13 +107,13 @@ def matrixbymatrix(m1, m2):
 
     for x in range(m1_rows):
         for y in range(m2_cols):
-            print "Result[" + str(x) + "]"+"["+str(y)+"] = ",
+            #print "Result[" + str(x) + "]"+"["+str(y)+"] = ",
             for z in range(m1_cols):
-                print str(m1[x][z]) + " x " + str(m2[z][y]),
-                if not z == m1_cols-1:
-                    print " + ",
-                else:
-                    print 
+                #print str(m1[x][z]) + " x " + str(m2[z][y]),
+                #if not z == m1_cols-1:
+                #    print " + ",
+                #else:
+                #    print 
                 result[x][y] += m1[x][z]*m2[z][y]
     
     return result
@@ -128,26 +135,29 @@ def idMatrix(size):
     
     return result
 
+print t.timeit('dot(mtest1, mtest2)', setup="from __main__ import dot, mtest1, mtest2", number = 100000)
+print t.timeit('matrixbymatrix(mtest3, mtest4)', setup="from __main__ import matrixbymatrix, mtest3, mtest4", number = 100000)
+
 
 # will not run   
-matrixbycolumnvector(v, m1)
+#matrixbycolumnvector(v, m1)
 # will not run
-matrixbycolumnvector(m1, m1)
+#matrixbycolumnvector(m1, m1)
 # will not run
-matrixbycolumnvector(m2, v)
+#matrixbycolumnvector(m2, v)
 # runs
-print matrixbycolumnvector(m1, v)
+#print matrixbycolumnvector(m1, v)
 # will not run
-matrixbymatrix(v,m2)
+#matrixbymatrix(v,m2)
 # will not run
-matrixbymatrix(m1,v)
+#matrixbymatrix(m1,v)
 # will not run
-matrixbymatrix(m1,m3)
+#matrixbymatrix(m1,m3)
 # runs
-print matrixbymatrix(m1,m2)
+#print matrixbymatrix(m1,m2)
 # will not run
-idMatrix("four")
+#idMatrix("four")
 # runs
-print idMatrix(4)
+#print idMatrix(4)
 
 
