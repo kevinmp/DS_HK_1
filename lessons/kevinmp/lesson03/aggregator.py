@@ -12,25 +12,27 @@ def get_nytimes_datasets(n):
     assert n < 31
     df = pd.DataFrame()
     for i in range(1,n+1):
+    # files already curl-ed to local so no need to dl on the fly
         #url = 'http://stat.columbia.edu/~rachel/datasets/nyt'+str(i)+'.csv'
         url = 'nyt'+str(i)+'.csv'
-        print 'Retrieving...', url
+    print 'Reading...', url
         csv = pd.read_csv(url)
         print 'Obtained', len(csv), 'records'
         df = df.append(csv)
     return df
 
-def ratio(x,y):
-    if y != 0:
-        return x/y
-    else:
-        return 0
-def CTR(df):
-    return  (sum(df["Clicks"])/sum(df["Impressions"]))
-
+# just load 1 data file in this example
 df = get_nytimes_datasets(1)
-#df['CTR'] = df[['Clicks','Impressions']].apply(CTR)
-df2= df[["Age","Gender","Signed_In","Clicks","Impressions"]].groupby(["Age","Gender","Signed_In"]).apply(CTR)
-print df2
 
-df2.to_csv('nytimes_aggregation.csv', header=True)
+# group by and sum it - returns a dataframe 
+df=df[["Age","Gender","Signed_In","Clicks","Impressions"]].groupby(["Age","Gender","Signed_In"]).sum()
+
+# calculate the CTR. map? we don't need no map.
+df["CTR"] = df["Clicks"]/ df["Impressions"]
+
+# drop the unecessary columns
+del df["Clicks"]
+del df["Impressions"]
+
+#write out CSV file 
+df.to_csv('nytimes_aggregation.csv')
